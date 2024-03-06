@@ -1,6 +1,7 @@
 <template>
-  <div>
-    <h1 class="text-3xl">ServU</h1>
+  <div class="flex flex-row w-screen h-screen gap-8 bg-violet-950 justify-center items-center">
+      <Description />
+      <GoTo />
   </div>
 </template>
 
