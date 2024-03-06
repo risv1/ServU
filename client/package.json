@@ -1,7 +1,18 @@
 {
   "name": "nuxt-app",
+  "dependencies": {
+    "@nuxtjs/tailwindcss": "^6.11.4",
+    "class-variance-authority": "^0.7.0",
+    "clsx": "^2.1.0",
+    "lucide-vue-next": "^0.344.0",
+    "nuxt": "^3.10.3",
+    "radix-vue": "^1.4.9",
+    "tailwindcss-animate": "^1.0.7",
+    "vue": "^3.4.19",
+    "vue-router": "^4.3.0",
+    "zod": "^3.22.4"
+  },
   "private": true,
-  "type": "module",
   "scripts": {
     "build": "nuxt build",
     "dev": "nuxt dev",
@@ -9,22 +20,5 @@
     "preview": "nuxt preview",
     "postinstall": "nuxt prepare"
   },
-  "dependencies": {
-    "@nuxtjs/tailwindcss": "^6.11.4",
-    "@vee-validate/zod": "^4.12.5",
-    "class-variance-authority": "^0.7.0",
-    "clsx": "^2.1.0",
-    "lucide-vue-next": "^0.344.0",
-    "nuxt": "^3.10.3",
-    "radix-vue": "^1.4.9",
-    "tailwind-merge": "^2.2.1",
-    "tailwindcss-animate": "^1.0.7",
-    "vee-validate": "^4.12.5",
-    "vue": "^3.4.19",
-    "vue-router": "^4.3.0",
-    "zod": "^3.22.4"
-  },
-  "devDependencies": {
-    "shadcn-nuxt": "^0.9.0"
-  }
+  "type": "module"
 }

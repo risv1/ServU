@@ -1,12 +1,11 @@
 <template>
-    <div>
-        <h1 class="text-3xl">Login</h1>
-    </div>
+  <div class="bg-violet-950 flex justify-center items-center w-full h-screen">
+    <LoginForm />
+  </div>
 </template>
 
-<script setup>
+<script setup lang="ts">
     useHead({
-      title: 'ServU / Login',
-    })
-
+        title: "ServU / Login",
+    });
 </script>
