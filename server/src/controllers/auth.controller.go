@@ -6,8 +6,10 @@ import (
 	"fmt"
 	"os"
 	"time"
+
 	"github.com/dgrijalva/jwt-go"
 	"github.com/gofiber/fiber/v2"
+	"github.com/google/uuid"
 	"github.com/joho/godotenv"
 	"golang.org/x/crypto/bcrypt"
 )
@@ -32,8 +34,10 @@ func Register(c *fiber.Ctx) error {
 
 	password, _ := bcrypt.GenerateFromPassword([]byte(data["password"]), 14)
 
+	id := uuid.New().String() 
+
 	user := models.User{
-		ID: "1",
+		ID: id,
 		Name: data["name"],
 		Email: data["email"],
 		Password: string(password),
