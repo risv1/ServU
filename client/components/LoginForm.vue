@@ -41,7 +41,7 @@ const submitSchema = object({
     password: z.string().min(8),
 })
 
-const onSubmit = (event: Event) => {
+const onSubmit = async(event: Event) => {
     event.preventDefault()
     try {
         const validatedData = submitSchema.parse({
@@ -49,12 +49,36 @@ const onSubmit = (event: Event) => {
             password: password.value
         })
         if (validatedData) {
-            console.log("Form submitted successfully!", email, password);
+          const res = await fetch("http://localhost:8000/login", {
+            method: "POST",
+            credentials: "include",
+            headers: {
+              "Content-Type": "application/json",
+            },
+            body: JSON.stringify({
+              email: email.value,
+              password: password.value,
+            }),
+          })
+          if(!res.ok) {
+            throw createError({
+              message: "Unable to submit form!",
+              statusCode: 400
+            })
+          }
+            console.log("Form submitted successfully!", res.body);
+            navigateTo("/");
         } else {
-            console.error("Validation error:",);
+            throw createError({
+                message: "Form validation failed!",
+                statusCode: 400
+            })
         }
     } catch (error) {
-        console.error("Unexpected error:", error);
+        throw createError({
+            message: "Unable to submit form!",
+            statusCode: 400
+        })
     }
 }
 

@@ -34,10 +34,24 @@
             >Request</NuxtLink
           >
           <NuxtLink
+            v-show="admin"
+            class="hover:bg-violet-700 p-3 rounded duration-150 ease-in-out"
+            href="/admin"
+            >Admin</NuxtLink
+          >
+          <NuxtLink
+            v-show="login"
             class="hover:bg-violet-700 p-3 rounded duration-150 ease-in-out"
             href="/login"
             >Login</NuxtLink
+          ><button
+            v-show="logout"
+            @click="logoutUser()"
+            class="hover:bg-violet-700 p-3 rounded duration-150 ease-in-out"
+            href="/login"
           >
+            Logout
+          </button>
         </div>
       </div>
     </div>
@@ -64,18 +78,46 @@
   </div>
 </template>
 
-<script>
-export default {
-  data() {
-    return {
-      show: false,
-    };
-  },
-  methods: {
-    toggle() {
-      this.show = !this.show;
-      console.log("clicked");
-    },
-  },
+<script setup>
+const show = ref(false);
+const admin = ref(false);
+const login = ref(true);
+const logout = ref(false);
+
+const toggle = () => {
+  show.value = !show.value;
 };
+
+const logoutUser = async() => {
+  const res = await fetch("http://localhost:8000/logout", {
+    method: "POST",
+    credentials: "include",
+    headers: { "Content-Type": "application/json" },
+  });
+  if (res.ok) {
+    login.value = true;
+    logout.value = false;
+    admin.value = false;
+    console.log("logged out");
+  }
+}
+
+onMounted(async () => {
+  const res = await fetch("http://localhost:8000/session", {
+    method: "GET",
+    credentials: "include",
+    headers: { "Content-Type": "application/json" },
+  });
+  const data = await res.json();
+  if (res.ok) {
+    login.value = false;
+    logout.value = true;
+    if (data.role === "admin") {
+      admin.value = true;
+      console.log("im admin");
+    } else {
+      console.log("not admin");
+    }
+  }
+});
 </script>
